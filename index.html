@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q4GE1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Sign Up Here!</h2>
+    <form id="signupForm">
+        <div>
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name">
+        </div>
+
+        <div>
+            <label for="username">Preferred Username:</label><br>
+            <input type="text" id="username" name="username">
+        </div>
+
+        <div>
+            <label for="age">Age:</label><br>
+            <input type="number" id="age" name="age" min="0" max="100">
+        </div>
+
+        <div>
+            <label for="gender">Gender:</label><br>
+            <select name="gender" id="gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Prefer Not To Mention">Prefer not to mention</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password">
+        </div>
+
+        <div>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email">
+        </div>
+
+        <div>
+            <label for="address">Address:</label><br>
+            <textarea id="address" name="address"></textarea>
+        </div>
+
+        <div>
+            <label for="interests">Interests:</label><br>
+            <textarea id="interests" name="interests"></textarea>
+        </div>
+
+        <div>
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
+        </div>
+    </form>
+    
+    <div id="userData"></div>
+
+    <script src="script.js"></script>
+</body>
+<script>
+    
+function displayUserData() {
+    var lineBreak = "<br>";
+    var userData = `
+        Name: ${document.getElementById("name").value} ${lineBreak}
+        Username: ${document.getElementById("username").value} ${lineBreak}
+        Gender: ${document.getElementById("gender").value} ${lineBreak}
+        Password: ${document.getElementById("password").value} ${lineBreak}
+        Email: ${document.getElementById("email").value} ${lineBreak}
+        Address: ${document.getElementById("address").value} ${lineBreak}
+        About the User: ${document.getElementById("interests").value} ${lineBreak}
+    `;
+    document.getElementById("userData").innerHTML = userData;
+}
+
+
+function applyRedBorder(inputElement) {
+    if (inputElement.value === "") {
+        inputElement.style.border = "4px solid red";
+    } else {
+        inputElement.style.border = "4px solid #00FF7F";
+    }
+}
+
+
+function applyGreenBorder(inputElement) {
+    inputElement.style.border = "4px solid #00FF7F";
+}
+
+
+function handleSubmit(event) {
+    displayUserData();
+    event.preventDefault();
+}
+
+document.querySelectorAll('input, select, textarea').forEach(element => {
+    element.addEventListener('blur', function() {
+        applyRedBorder(this);
+    });
+    element.addEventListener('focus', function() {
+        applyGreenBorder(this);
+    });
+});
+
+
+document.getElementById('signupForm').addEventListener('submit', handleSubmit);
+
+</script>
+</html>
